@@ -13,7 +13,7 @@
 <%- model_class = Customer -%>
 
 <div class="page-header">
-  <h5>Export to Excel | <%= link_to 'Export to Excel', url_for(:format => 'xls') %> |
+  <h5>Export to Excel | <%= link_to 'Export to Excel', customers_path(:format => 'xls') %> |<%= link_to 'Excel Download', customers_path(:format => :xls) %>
 				<!--<%= link_to "Customers", customers_path(format: "xlsx") %> |
 				<%= link_to "Business", businesses_path(format: "xlsx") %> |
 				<%= link_to "Co-applicants", co_applicants_path(format: "xlsx") %> |

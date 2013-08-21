@@ -8,24 +8,18 @@ class CustomersController < ApplicationController
     @co_applicants = CoApplicant.all
     @co_app_business = CoApplicantBusiness.all
     @customers = Customer.all
-    filename = "customers.xls"
     @all_custome = (@business + @co_applicants + @co_app_business + @customers).sort_by {|a| a.created_at}.reverse
     #@all_customer = @all_customer.page(params[:page]).per(5)
     respond_to do |format|
       format.html do # index.html.erb
-    		unless @all_custome.kind_of?(Array)
-     			@all_customer = @all_custome.page(params[:page]).per(10)
-		    else
-			    @all_customer = Kaminari.paginate_array(@all_custome).page(params[:page]).per(10)
-		    end
+     		unless @all_custome.kind_of?(Array)
+      			@all_customer = @all_custome.page(params[:page]).per(10)
+		     else
+			      @all_customer = Kaminari.paginate_array(@all_custome).page(params[:page]).per(10)
+		     end
       format.json { render json: @all_customer }
-      #format.xls { headers["Content-Disposition"] = "attachment; filename=\"#{filename}\"" }
-      format.xls do
-      render :xls => @all_custome,
-             :columns => [ :application_status, :applicant_name, :address, :status ],
-             :headers => %w[ Application_Status Applicant_Name Address Status ]
-      end
     end
+   end
   end
 
   def cust_residential
